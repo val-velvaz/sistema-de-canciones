@@ -36,24 +36,18 @@ public:
     void guardarEnArchivo(const std::string& nombreArchivo) const;
     void cargarDesdeArchivo(const std::string& nombreArchivo);
 
-    // Métodos Genéricos de Búsqueda
     int busquedaLineal(const T& elemento, int (*cmp)(const T&, const T&)) const;
     int busquedaBinaria(const T& elemento, int (*cmp)(const T&, const T&)) const;
 
-    // Métodos Genéricos de Ordenamiento
     void sortBubble(int (*cmp)(const T&, const T&));
     void sortInsert(int (*cmp)(const T&, const T&));
     void sortSelect(int (*cmp)(const T&, const T&));
     void sortShell(int (*cmp)(const T&, const T&));
     
-    // Método para verificar ordenamiento genérico
     bool isSort(int (*cmp)(const T&, const T&)) const;
 
-    // Método auxiliar para intercambio
     void swapData(T&, T&);
 };
-
-// ============= IMPLEMENTACIÓN DE MÉTODOS TEMPLATE =============
 
 template <class T>
 bool Lista<T>::isValidPos(const int& p) const {
