@@ -438,7 +438,7 @@ void Menu::ordenarCatalogo() {
             mostrarLista();
 
         } else if (opcionCriterio == 5) {
-             std::cout << "Regresando al menu principal...\n";
+            std::cout << "Regresando al menu principal...\n";
         } else {
             std::cout << "Opcion invalida.\n";
         }

@@ -103,7 +103,6 @@ std::istream& operator>>(std::istream& is, Cancion& c) {
     return is;
 }
 
-// Funciones de comparación globales
 int compararPorNombre(const Cancion& a, const Cancion& b) {
     if (a.getNombre() < b.getNombre()) return -1;
     if (a.getNombre() > b.getNombre()) return 1;

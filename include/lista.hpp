@@ -99,10 +99,10 @@ bool Lista<T>::isSort(int (*cmp)(const T&, const T&)) const {
 template <class T>
 void Lista<T>::inserta(const int& p, const T& e) {
     if (llena()) {
-        throw std::overflow_error("La lista está llena, no se puede insertar.");
+        throw std::overflow_error("La lista esta llena, no se puede insertar.");
     }
     if (p != -1 && (p < 0 || p > last + 1)) {
-        throw std::out_of_range("Posición de inserción inválida.");
+        throw std::out_of_range("Posicion de insercion invalida.");
     }
 
     int pos = (p == -1) ? last + 1 : p;
