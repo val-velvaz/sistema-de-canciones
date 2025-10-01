@@ -14,6 +14,9 @@ private:
 
     bool isValidPos(const int&) const;
     void copyAll(const Lista<T>&);
+    
+    void sortDataMerge(); // cambiar este por el otro
+    void sortDataMerge(const int&, const int&, int (cont T&, const T&));
 
 public:
     Lista();
@@ -43,6 +46,8 @@ public:
     void sortInsert(int (*cmp)(const T&, const T&));
     void sortSelect(int (*cmp)(const T&, const T&));
     void sortShell(int (*cmp)(const T&, const T&));
+    void sortDataMerge(const int&, const int&);
+
     
     bool isSort(int (*cmp)(const T&, const T&)) const;
 
@@ -320,4 +325,87 @@ int Lista<T>::busquedaBinaria(const T& elemento, int (*cmp)(const T&, const T&))
     return -1;
 }
 
+template <class T>
+void Lista<T>::sortDataMerge() {
+    this->sortDataMerge(0, this->last);
+}
+
+template <class T>
+void Lista<T>::sortDataMerge(const int& leftedge, const int& rightedge) {
+    if (leftedge >= rightedge){ // criterio de paro
+        return;
+    }
+    int m(leftedge + rightedge) / 2;
+
+    // divide y venceras
+    this->sortDataMerge(leftedge, m);
+    this->sortDataMerge(m + 1, rightedge);
+
+    // intercalacion 
+    static T tmp[data.size()]; // arreglo temporal (se reutiliza el mismo espacio de memoria)
+    for (int z(leftedge); z <= rightedge; z++) {
+        tmp[z] = this->data[z];
+    }
+    int i(leftedge), j(m + 1), x(rightedge);
+    while(i <= m && j<= rightedge) {
+        // iteraciones internas
+        while(i <= m && tmp && tmp[i] <= tmp[j]) {
+            this->data[x++] = tmp[i++];
+        }
+        if (i <= m) {
+            while(j <= rightedge && tmp[j] <= tmp[i]) {
+                this->data[x++] = tmp[j++]
+            }
+        }
+    }
+    while(i <= m) {
+        this->data[x++] = tmp[i++];
+    }
+
+    // codigo faltante
+    
+}
+/* incorporar esta
+template <class T> // añadir este
+void Lista<T>::sortDataMerge(int cmp(const &T rightedge, const &T leftedge)) {
+    this->sortDataMerge(0, this->last);
+}
+
+
+template <class T>
+void Lista<T>::sortDataMerge(const int& leftedge, const int& rightedge) {
+    if (leftedge >= rightedge){ // criterio de paro
+        return;
+    }
+    int m(leftedge + rightedge) / 2;
+
+    // divide y venceras
+    this->sortDataMerge(leftedge, m, cmp);
+    this->sortDataMerge(m + 1, rightedge, cmp);
+
+    // intercalacion 
+    static T tmp[data.size()]; // arreglo temporal (se reutiliza el mismo espacio de memoria)
+    for (int z(leftedge); z <= rightedge; z++) {
+        tmp[z] = this->data[z];
+    }
+    int i(leftedge), j(m + 1), x(rightedge);
+    while(i <= m && j<= rightedge) {
+        // iteraciones internas
+        while(i <= m && tmp && tmp[i] <= tmp[j]) {
+            this->data[x++] = tmp[i++];
+        }
+        if (i <= m) {
+            while(j <= rightedge && tmp[j] <= tmp[i]) {
+                this->data[x++] = tmp[j++]
+            }
+        }
+    }
+    while(i <= m) {
+        this->data[x++] = tmp[i++];
+    }
+
+    // codigo faltante
+    
+}
+*/
 #endif
