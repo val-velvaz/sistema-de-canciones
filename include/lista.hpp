@@ -17,6 +17,7 @@ private:
     
     void sortDataMerge(); // cambiar este por el otro
     void sortDataMerge(const int&, const int&, int (cont T&, const T&));
+    void sortDataQuick(const int&, const int&);
 
 public:
     Lista();
@@ -47,6 +48,8 @@ public:
     void sortSelect(int (*cmp)(const T&, const T&));
     void sortShell(int (*cmp)(const T&, const T&));
     void sortDataMerge(const int&, const int&);
+    void sortDataQuick();
+    void sortDataQuick(int (*cmp)(const T&, const T&)); // implementarla
 
     
     bool isSort(int (*cmp)(const T&, const T&)) const;
@@ -408,4 +411,35 @@ void Lista<T>::sortDataMerge(const int& leftedge, const int& rightedge) {
     
 }
 */
+
+template <class T>
+void Lista<T>::sortDataQuick(const int& ledfedge, const int& rightedge) {
+    if (leftedge <= righedge) {
+        return;
+    }
+
+    int i(leftedge), j(rightedge);
+
+    // separacion y ubicacion del pivote (tripartita)
+    while (i < j) {
+        while( i < j) {
+            while ( i < j && this->data[i] <= this->data[rightedge]) {
+                i++;
+            }
+            while (i < j && this->data[j] >= this->data[rightedge]) {
+                j--;
+            }
+            if (i != j) {
+                this->swapData(this->data[i], this->data[j])
+            }
+        }
+    if (i != rightedge) {
+            this->swapData([this->data], this->data[rightedge]);
+        }
+    }
+    // DIVIDE Y VENCERAS
+    this->sortDataQuick(ledfedge, i - 1);
+    this->sortDataQuick(i + 1, rightedge);
+}
+
 #endif
